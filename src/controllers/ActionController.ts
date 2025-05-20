@@ -8,7 +8,7 @@ class ActionsController {
   async download(req: Request, res: Response) {
     const { url, quality } = req.body;
 
-    console.log(url, quality);
+    const userAgent = req.headers["user-agent"] || "Mozilla/5.0";
 
     if (!url || !url.startsWith("http")) {
       return res.status(400).json({ error: "Invalid URL" });
@@ -18,9 +18,15 @@ class ActionsController {
 
     res.setHeader("Content-Type", "video/mp4");
 
-    const process = spawn("./yt-dlp", ["-f", selectedFormat, "-o", "-", url]);
-
-    console.log("LOG_process - ", process);
+    const process = spawn("./yt-dlp", [
+      "-f",
+      selectedFormat,
+      "-o",
+      "-",
+      "--user-agent",
+      userAgent,
+      url,
+    ]);
 
     process.stdout.pipe(res);
 
