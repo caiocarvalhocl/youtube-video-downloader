@@ -7,17 +7,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true, // Enables all strict type-checking options
     "skipLibCheck": true,
-    "outDir": "./dist", // Where compiled JS files go
-    "rootDir": "./src", // Where your source files are
+    "rootDir": "./src",
+    "outDir": "./dist",
     "resolveJsonModule": true, // So you can import JSON files
     "noEmit": false,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": false,
+    "emitDeclarationOnly": false,
+    "declaration": false
   },
   "include": [
-    "src"
-  ], // Include only your source code
-  "exclude": [
-    "node_modules",
-    "dist"
-  ] // Exclude these folders
+    "src/**/*"
+  ] // ou ["**/*"] se estiver usando rootDir "./"
 }
