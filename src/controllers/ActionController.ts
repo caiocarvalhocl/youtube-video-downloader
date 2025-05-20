@@ -18,9 +18,9 @@ class ActionsController {
 
     res.setHeader("Content-Type", "video/mp4");
 
-    const process = spawn("yt-dlp", ["-f", selectedFormat, "-o", "-", url]);
+    const process = spawn("./yt-dlp", ["-f", selectedFormat, "-o", "-", url]);
 
-    console.log("process - ", process);
+    console.log("LOG_process - ", process);
 
     process.stdout.pipe(res);
 
@@ -28,7 +28,7 @@ class ActionsController {
       console.error(`stderr: ${data}`);
     });
 
-    console.log("stderrr");
+    console.log("LOG_stderrr");
 
     process.on("close", (code) => {
       if (code !== 0) {
