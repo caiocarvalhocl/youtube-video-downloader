@@ -18,7 +18,11 @@ class ActionsController {
 
     res.setHeader("Content-Type", "video/mp4");
 
+    console.log("LOG - ", userAgent);
+
     const process = spawn("./yt-dlp", [
+      "--geo-bypass",
+      "--force-ipv4",
       "-f",
       selectedFormat,
       "-o",
