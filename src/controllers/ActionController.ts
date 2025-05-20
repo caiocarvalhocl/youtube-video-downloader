@@ -8,6 +8,8 @@ class ActionsController {
   async download(req: Request, res: Response) {
     const { url, quality } = req.body;
 
+    console.log(url, quality);
+
     if (!url || !url.startsWith("http")) {
       return res.status(400).json({ error: "Invalid URL" });
     }
@@ -18,11 +20,15 @@ class ActionsController {
 
     const process = spawn("yt-dlp", ["-f", selectedFormat, "-o", "-", url]);
 
+    console.log("process - ", process);
+
     process.stdout.pipe(res);
 
     process.stderr.on("data", (data) => {
       console.error(`stderr: ${data}`);
     });
+
+    console.log("stderrr");
 
     process.on("close", (code) => {
       if (code !== 0) {

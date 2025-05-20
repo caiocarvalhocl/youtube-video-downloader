@@ -4,6 +4,7 @@ import { actionsController } from "../controllers/ActionController";
 const router = Router();
 
 router.post("/api/download", (req, res) => {
+  console.log("passou na rota");
   actionsController.download(req, res);
 });
 
